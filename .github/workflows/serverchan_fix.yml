@@ -1,0 +1,15 @@
+name: 推送通知到方糖（可手动触发）
+on:
+  push:  # 代码提交自动触发
+  workflow_dispatch:  # 手动触发开关（关键）
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 发送到方糖
+        uses: ddiu8081/action-serverchan@main
+        with:
+          sendkey: ${{ secrets.SERVERCHAN_SENDKEY }}
+          title: "GitHub仓库通知"
+          desp: "仓库：${{ github.repository }}\n操作人：${{ github.actor }}\n触发方式：${{ github.event_name }}"
