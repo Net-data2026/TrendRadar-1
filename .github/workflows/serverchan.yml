@@ -1,0 +1,13 @@
+name: 推送通知到方糖
+on: [push]
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 发送到方糖
+        uses: ddiu8081/action-serverchan@main
+        with:
+          sendkey: ${{ secrets.SERVERCHAN_SENDKEY }}
+          title: "你的GitHub仓库有新提交啦"
+          desp: "仓库：${{ github.repository }}\n提交人：${{ github.actor }}\n提交内容：${{ github.event.head_commit.message }}"
